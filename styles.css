@@ -197,3 +197,30 @@ h2 {
 .attribution a {
 	color: hsl(228, 45%, 44%);
 }
+#new-job-form{
+align-items: center;
+width: 50%;
+margin-left: 14rem;
+background-color: var(--color-background-white);
+padding: 20px;
+}
+#job-form{
+	display: flex;
+	flex-direction: column;
+	line-height: 20px;
+	row-gap: 20px;
+
+}
+#job-form input{
+	padding: 5px;
+	outline: none;
+	border-color: var(--color-background-filter);
+}
+button{
+	width: 70px;
+	padding: 8px;
+	outline: none;
+	border: transparent;
+	color: 	var(--color-primary-turqoise);
+	background-color: var(--color-background-filter);
+}

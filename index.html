@@ -354,6 +354,26 @@
 				</section>
 				<!-- Item End -->
 			</div>
+			<button id="add-new-button">Add</button>
+
+<div class="hidden" id="new-job-form">
+    <form id="job-form">
+        <input type="text" placeholder="Company Name" name="companyName" />
+        <input type="text" placeholder="Logo Link" name="logoLink" />
+        <input type="text" placeholder="Position" name="position" />
+		<input type="text" placeholder="contract" name="contract" />
+		<input type="text" placeholder="location" name="location" />
+
+        <label>
+            <input type="checkbox" name="isNew" /> New
+        </label>
+        <label>
+            <input type="checkbox" name="isFeatured" /> Featured
+        </label>
+        <button type="submit">Add Job</button>
+    </form>
+</div>
+
 		</main>
 	</body>
 </html>
