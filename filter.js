@@ -1,18 +1,18 @@
 $(document).ready(function () {
-	let activeFilters = []
+    let activeFilters = [];
 
-	function resetFilters() {
-		activeFilters = []
-		$(".filters").addClass("hidden")
-		$("main").css("padding-top", "3rem")
-		$(".card").removeClass("hidden")
-	}
+    function resetFilters() {
+        activeFilters = [];
+        $(".filters").addClass("hidden");
+        $("main").css("padding-top", "3rem");
+        $(".card").removeClass("hidden");
+    }
 
-	function updateDisplayedFilters() {
-		if (activeFilters.length < 1) {
-			resetFilters()
-			return
-		}
+    function updateDisplayedFilters() {
+        if (activeFilters.length < 1) {
+            resetFilters();
+            return;
+        }
 
 		// Filter Display
 		$(".filters > ul").empty()
@@ -58,104 +58,87 @@ $(document).ready(function () {
 
 	function filterCards() {}
 
-	$(".filters__clear").click(function (e) {
-		e.preventDefault()
-		resetFilters()
-	})
+  $(".filters__clear").click(function (e) {
+        e.preventDefault();
+        resetFilters();
+    });
 
-	$(this).on("click", "img.filters__removeButton", function (e) {
-		e.preventDefault()
-		activeFilters = activeFilters.filter((item) => {
-			return item != $(this)[0].dataset["filtername"]
-		})
-		updateDisplayedFilters()
-	})
+    $(this).on("click", "img.filters__removeButton", function (e) {
+        e.preventDefault();
+        activeFilters = activeFilters.filter((item) => {
+            return item != $(this)[0].dataset["filtername"];
+        });
+        updateDisplayedFilters();
+    });
 
-	$(".card__filters > li").click(function (e) {
-		e.preventDefault()
-		$(".filters").removeClass("hidden")
+    $(".card__filters > li").click(function (e) {
+        e.preventDefault();
+        $(".filters").removeClass("hidden");
 
-		let newFilter = $(this)[0].childNodes[0].data
-		if (!activeFilters.includes(newFilter)) {
-			activeFilters.push(newFilter)
-		}
-		updateDisplayedFilters()
-	})
-	
-	$("#add-new-button").click(function () {
+        let newFilter = $(this)[0].childNodes[0].data;
+        if (!activeFilters.includes(newFilter)) {
+            activeFilters.push(newFilter);
+        }
+        updateDisplayedFilters();
+    });
+
+    $("#add-new-button").click(function () {
         $("#new-job-form").removeClass("hidden");
     });
 
-    // Handle form submission
+     // Handle form submission
     $("#job-form").submit(function (e) {
         e.preventDefault();
-        
-		$(".Addbtn").addClass("hide");
+
         // Get the form input values
         const companyName = $("input[name='companyName']").val();
         const logoLink = $("input[name='logoLink']").val();
         const position = $("input[name='position']").val();
-		const contract = $("input[name='contract']").val();
-		const languages = $("input[name='languages']").val();
-		const tools = $("input[name='tools']").val();
-
-		const location = $("input[name='location").val();
+        const contract = $("input[name='contract']").val(); // Use the correct name
+        const location = $("input[name='location']").val(); // Use the correct name
 
         const isNew = $("input[name='isNew']").is(":checked");
         const isFeatured = $("input[name='isFeatured']").is(":checked");
 
         // Create a new job listing HTML based on the input values
         const newJobListing = `
-		<div class="card">
-		<img src="./images/eyecam-co.svg" alt="eyecam company logo" />
-		<section>
-			<div class="row card__title">
-				<h2>`+ companyName +`</h2>
-				`
-				 if(isNew == ture){
-					
-                    `<h3 class="tag">New!</h3>`
-				}
-				if(isFeatured == true){
-					`<h3 class="tag background-dark">Featured</h3>
-					`
-				}
-				+ `
-			</div>
-			<h1>` +  position + `</h1>
-			<ul class="row card__jobData">
-				<li>3w ago</li>
-				<li>`+contract+`</li>
-				<li>`+location+`</li>
-			</ul>
-		</section>
-		<div class="mobile-divider"></div>
-		<section>
-			<ul class="card__filters">
-				<!-- Role -->
-				<li>Fullstack</li>
-				<!-- Level -->
-				<li>Midweight</li>
-				<!-- Languages -->
-				<li>JavaScript</li>
-				<li>Python</li>
-				<!-- Tools -->
-				<li>Django</li>
-			</ul>
-		</section>
-		<!-- Item End -->
-	</div>
+        <div class="card">
+            <img src="${logoLink}" alt="${companyName} logo" />
+            <section>
+                <div class="row card__title">
+                    <h2>${companyName}</h2>
+                    ${isNew ? '<h3 class="tag">New!</h3>' : ''}
+                    ${isFeatured ? '<h3 class="tag background-dark">Featured</h3>' : ''}
+                </div>
+                <h1>${position}</h1>
+                <ul class="row card__jobData">
+                    <li>1w ago</li>
+                    <li>${contract}</li>
+                    <li>${location}</li>
+                </ul>
+            </section>
+            <div class="mobile-divider"></div>
+            <section>
+                <ul class="card__filters">
+                    <!-- Role -->
+                    <li>Fullstack</li>
+                    <!-- Level -->
+                    <li>Midweight</li>
+                    <!-- Languages -->
+                    <li>JavaScript</li>
+                    <li>Python</li>
+                    <!-- Tools -->
+                    <li>Django</li>
+                </ul>
+            </section>
+        </div>
         `;
 
-        // Append the new job listing to the main section
-        $("main").append(newJobListing);
+        // Add the new job listing above the existing ones
+        $("main").prepend(newJobListing);
 
         // Reset the form and hide it
         $("#job-form")[0].reset();
         $("#new-job-form").addClass("hidden");
-		$(".Addbtn").addClass("hide");
-
     });
-})
-
-
+});
