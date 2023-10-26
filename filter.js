@@ -90,6 +90,7 @@ $(document).ready(function () {
     $("#job-form").submit(function (e) {
         e.preventDefault();
         
+		$(".Addbtn").addClass("hide");
         // Get the form input values
         const companyName = $("input[name='companyName']").val();
         const logoLink = $("input[name='logoLink']").val();
@@ -152,6 +153,8 @@ $(document).ready(function () {
         // Reset the form and hide it
         $("#job-form")[0].reset();
         $("#new-job-form").addClass("hidden");
+		$(".Addbtn").addClass("hide");
+
     });
 })
 
